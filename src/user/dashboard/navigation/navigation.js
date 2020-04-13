@@ -121,8 +121,7 @@ class Navigation extends Component {
               <b>Account</b>
             </NavLink>
           </ListGroup.Item>
-          <ListGroup.Item style={divStyle}  
-          className={this.props.settings ? "active" : "inactive"}>
+          <ListGroup.Item style={divStyle}  className={this.props.settings ? "active" : "inactive"}>
             <svg
               width="38"
               height="38"
@@ -169,8 +168,7 @@ Navigation.propTypes = {
   post: PropTypes.bool,
   org: PropTypes.bool,
   profile: PropTypes.bool,
-  settings: PropTypes.bool,
-  logout: PropTypes.bool
+  settings: PropTypes.bool
 }
 
 export default Navigation;

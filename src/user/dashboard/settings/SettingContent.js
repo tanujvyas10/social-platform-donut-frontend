@@ -2,6 +2,14 @@ import React, { Component } from 'react';
 import SettingSidebar from './layouts/SettingSidebar';
 import './styles/settings.scss';
 import Popups from '../../../common/Popups';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import { blue } from '@material-ui/core/colors';
+
+const theme = createMuiTheme({
+  palette: {
+    primary: blue
+  },
+});
 
 class SettingContent extends Component {
   constructor(props){
@@ -46,6 +54,7 @@ class SettingContent extends Component {
     }
     
     return (
+      <ThemeProvider theme={theme}>
       <div className="">
         <div className="row ml-3">
           <div className="col-md-9 mt-5">
@@ -56,7 +65,15 @@ class SettingContent extends Component {
               </div>
               <div className="col-md-9">
                <p className="options-value">{name}
-               <span><a href="javascript:void(0)" onClick={handleToggle} style={{float: "right"}} name="name">Edit</a></span>
+               <span>
+                 <a 
+                  href="javascript:void(0)" 
+                  onClick={handleToggle} 
+                  style={{float: "right"}} 
+                  name="name"
+                  >Edit
+                  </a>
+                </span>
                </p>
               </div>
             </div><hr/>
@@ -66,7 +83,15 @@ class SettingContent extends Component {
               </div>
               <div className="col-md-9">
                 <p className="options-value">{username}
-                  <span><a href="javascript:void(0)" onClick={handleToggle} style={{float: "right"}} name="username">Edit</a></span>
+                  <span>
+                    <a 
+                     href="javascript:void(0)" 
+                     onClick={handleToggle} 
+                     style={{float: "right"}} 
+                     name="username"
+                     >Edit
+                     </a>
+                  </span>
                 </p>
               </div>
             </div><hr/>
@@ -76,7 +101,15 @@ class SettingContent extends Component {
               </div>
               <div className="col-md-9">
                 <p className="options-value">{email}
-                <span><a href="javascript:void(0)" onClick={handleToggle} style={{float: "right"}} name="email">Edit</a></span>
+                <span>
+                  <a 
+                   href="javascript:void(0)" 
+                   onClick={handleToggle} 
+                   style={{float: "right"}} 
+                   name="email"
+                   >Edit
+                  </a>
+                </span>
                 </p>
               </div>
             </div><hr/>
@@ -86,7 +119,15 @@ class SettingContent extends Component {
               </div>
               <div className="col-md-9">
                 <p className="options-value">{identity ? "Yes" : "No"}
-                <span><a href="javascript:void(0)" onClick={handleToggle} style={{float: "right"}} name="identity">View</a></span>
+                <span>
+                  <a 
+                   href="javascript:void(0)" 
+                   onClick={handleToggle} 
+                   style={{float: "right"}} 
+                   name="identity"
+                   >View
+                   </a>
+                </span>
                 </p>
               </div>
             </div><hr/>
@@ -95,7 +136,13 @@ class SettingContent extends Component {
                 <p className="options">Deactivate account ?</p>
               </div>
               <div className="col-md-9">
-                <button className="btn btn-light" style={{float: "right"}} name="account" onClick={handleToggle}>Deactivate</button>
+                <button 
+                  className="btn btn-light" 
+                  style={{float: "right"}} 
+                  name="account" 
+                  onClick={handleToggle}
+                  >Deactivate
+                </button>
               </div>
             </div>
           </div>
@@ -109,6 +156,7 @@ class SettingContent extends Component {
           modalShow={this.state.modalShow}
         />
       </div>
+      </ThemeProvider>
     )
   }
 }

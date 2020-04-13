@@ -3,10 +3,13 @@
   min-height: 100vh;
   height: auto;
   font-family: Muli, sans-serif;
-  h1{
+  .Pinned-post {
     font-size: 26px;
     font-weight: bold;
     font-family: Muli, sans-serif;
+  }
+  .organization-update {
+    @extend .Pinned-post;
   }
   .navigation {
     flex: 0.5;
@@ -21,7 +24,6 @@
   }
   .promotions {
     flex: 1;
-    margin: 0px 20px;
   }
   .Pinned-post{
     padding: 20px 12px 0px 30px;

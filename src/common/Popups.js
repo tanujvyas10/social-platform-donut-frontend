@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
-import { Modal, Button, Form } from 'react-bootstrap';
-import { MdVerifiedUser } from 'react-icons/md';
-import { FaUserSlash } from 'react-icons/fa';
+import { Form, Modal } from 'react-bootstrap';
+import { Button, FormControl, TextField, FormGroup } from '@material-ui/core';
+import { Save, Close } from '@material-ui/icons';
+import identityImage from "../images/identityVerify.gif";
 
 class Popups extends Component {
   constructor(props){
@@ -33,6 +34,7 @@ class Popups extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+    console.log("submitted value ", this.state);
     // send request to server to update the data 
     // ADD CODE HERE
   }
@@ -49,24 +51,26 @@ class Popups extends Component {
 
   render() {
     const { option, optionValue } = this.state;
+    const optionsArray = ["name", "email", "account", "username", "identity"];
+    let options;
     const updateName = (
       <Form>
         <div className="row">
-          <div className="col-md-9">
-             <Form.Group controlId="formBasicEmail">
-              <Form.Control 
-                type="text"
-                placeholder="Enter your name"
-                onChange={this.onChange}
-                defaultValue={optionValue}
-                name="name"
-              />
-            </Form.Group>
-          </div>
-          <div className="col-md-3">
-            <Button className="btn btn-light" type="button" onClick={this.handleSubmit}>
-              Save
-            </Button>
+          <div className="col-md-12">
+             <FormGroup >
+              <FormControl>
+                <TextField 
+                  label="Name" 
+                  placeholder="Name" 
+                  defaultValue={optionValue} 
+                  name="name" 
+                  onChange={this.onChange} 
+                  variant="outlined" 
+                  size="small" 
+                  style={{width: "300px" }}
+                  />
+              </FormControl>
+            </FormGroup>
           </div>
         </div>
       </Form>
@@ -75,21 +79,21 @@ class Popups extends Component {
     const updateEmail = (
       <Form>
         <div className="row">
-          <div className="col-md-9">
-             <Form.Group controlId="formBasicName">
-              <Form.Control 
-                type="text"
-                placeholder="Enter email address"
-                onChange={this.onChange}
-                defaultValue={optionValue}
-                name="email"
-              />
-            </Form.Group>
-          </div>
-          <div className="col-md-3">
-            <Button className="btn btn-light" type="button" onClick={this.handleSubmit}>
-              Save
-            </Button>
+          <div className="col-md-12">
+             <FormGroup >
+             <FormControl>
+                <TextField 
+                  label="Email" 
+                  placeholder="Email" 
+                  defaultValue={optionValue} 
+                  name="email" 
+                  onChange={this.onChange} 
+                  variant="outlined" 
+                  size="small" 
+                  style={{width: "300px" }}
+                  />
+              </FormControl>
+            </FormGroup>
           </div>
         </div>
       </Form>
@@ -97,21 +101,20 @@ class Popups extends Component {
     const updateUsername = (
       <Form>
         <div className="row">
-          <div className="col-md-9">
-             <Form.Group controlId="formBasicEmail">
-              <Form.Control 
-                type="text"
-                placeholder="Enter your username"
-                onChange={this.onChange}
-                defaultValue={optionValue}
-                name="username"
-              />
-            </Form.Group>
-          </div>
-          <div className="col-md-3">
-            <Button className="btn btn-light" type="button" onClick={this.handleSubmit}>
-              Save
-            </Button>
+          <div className="col-md-12">
+             <FormGroup >
+              <FormControl>
+                <TextField 
+                  label="Username" 
+                  placeholder="Username" 
+                  defaultValue={optionValue} 
+                  name="username" 
+                  onChange={this.onChange} 
+                  variant="outlined" 
+                  size="small" 
+                  style={{width: "300px" }}/>
+              </FormControl>
+            </FormGroup>
           </div>
         </div>
       </Form>
@@ -121,41 +124,92 @@ class Popups extends Component {
         <p className="text text-center" style={{color: "red"}}><b>Are you sure ??</b></p>
         <div className="row">
           <div className="col-md-2"></div>
-            <button className="btn btn-outline-success col-md-3" onClick={this.handleClose}>No</button>
+            <Button 
+              className="col-md-3" 
+              variant="outlined" 
+              color="primary" 
+              onClick={this.handleClose}
+              >No
+              </Button>
           <div className="col-md-2"></div>
-            <button className="btn btn-outline-danger col-md-3" onClick={this.handleDeactivateAccount}>Yes</button>
+            <Button 
+              className="col-md-3"
+              color="secondary"
+              variant="outlined"
+              onClick={this.handleDeactivateAccount}
+              >Yes
+              </Button>
           <div className="col-md-2"></div>
         </div>
       </div>
     );
 
     const checkVerification = (
-      <div className="container">
+      <div>
         <div className="row">
-          <div className="col-md-4"></div>
-          <div className="col-md-4">
-            { optionValue ? (<MdVerifiedUser size={60} color="blue"/>) : 
-            (<FaUserSlash size={60} color="red"/>)}
+          <div className="col-md-12">
+            <div className="center">{ optionValue ? (<div>
+               <center>
+                <img 
+                  className="img-fluid img-circle"
+                  src={identityImage} 
+                  alt="identity badge" 
+                  height="150px"
+                  width="150px"
+                />  
+                <p className="text lead"><b>Verified, Thanks</b></p>
+                </center>            
+            </div>) : 
+            ("Not verified")}</div>
           </div>
-          <div className="col-md-4"></div>
         </div>
       </div>
-    )
+    );
+    for(var i = 0; i < optionsArray.length; i++){
+      if(optionsArray[i] === option && option === "name"){
+        options = updateName;
+        break;
+      }
+      if(optionsArray[i] === option && option === "email"){
+        options = updateEmail;
+        break;
+      }
+      if (optionsArray[i] === option && option === "username") {
+        options = updateUsername;
+        break;
+      }
+      if (optionsArray[i] === option && option === "account") {
+        options = deactivateAccount;
+        break;
+      }
+      if (optionsArray[i] === option && option === "identity") {
+        options = checkVerification;
+        break;
+      }
+    }
+    
     return (
        <Modal show={this.state.show} onHide={this.handleClose} animation={false} centered>
         <Modal.Header closeButton>
           <Modal.Title>Update { " " + option }</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {Boolean(option === "name") ? updateName : null}
-          {Boolean(option === "email") ? updateEmail: null}
-          {Boolean(option === "username") ? updateUsername: null}
-          {Boolean(option === "account") ? deactivateAccount: null}
-          {Boolean(option === "identity") ? checkVerification : null}
+          {options}
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={this.handleClose}>
-            Close
+          <Button 
+              variant="outlined"
+              type="button" 
+              onClick={this.handleSubmit}
+              startIcon={<Save/>}
+              >Save
+          </Button>
+          <Button 
+            variant="contained" 
+            color="primary" 
+            startIcon={<Close/>}
+            onClick={this.handleClose} 
+            >Cancel
           </Button>
         </Modal.Footer>
       </Modal>
